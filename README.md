@@ -28,37 +28,43 @@ GoLangLearning/
 ## Programming conventions and style
 
 This project follows idiomatic Go conventions so you can read, write, and review Go code comfortably.
-If you come from Java, the main differences to keep in mind are: packages and module paths are lowercase; exported (public) identifiers start with a capital letter; unexported (private) identifiers start with lowercase. Below is a compact guide and examples.
+If you come from Java, the main differences to keep in mind are: packages and module paths are lowercase; exported (public) identifiers start with a capital letter; unexported (package-private) identifiers start with lowercase. Below is a compact guide, examples, and a short Java vs Go comparison.
+
+Goals for these conventions:
+- Keep code simple, readable, and idiomatic
+- Favor short, clear names for local variables
+- Use capitalization to indicate exported (public) API
 
 - Package names
   - Short, all-lowercase, usually the last element of the import path. Example: `package mathutil`.
   - Files belonging to the same package share the package name at the top of the file.
+  - Unlike Java's package hierarchy (com.example.app), Go packages are typically short and reflect a directory.
 
 - Module names and `go.mod`
-  - The module path (in `module` line of `go.mod`) is typically the repository import path (for example, `github.com/you/project`). Use lowercase and avoid introducing leading short prefixes like `m` unless it is part of the real path.
+  - The module path (in `module` line of `go.mod`) is typically the repository import path (for example, `github.com/you/project`). Use lowercase and avoid adding artificial single-letter prefixes (for example, don't name your module `mproject` unless it's part of the real path).
+  - The module path is not the same as a package name. It can include host and user (for VCS import paths).
 
 - Exported vs unexported identifiers
   - Any name that starts with a capital letter is exported (visible outside the package).
   - Names that start with a lowercase letter are unexported (package-private).
-  - Example:
+  - Examples:
 
     ```go
     package greetings
 
-    // Exported function (available to other packages)
+    // PrintHello is exported and visible to other packages.
     func PrintHello(name string) string {
         return "Hello " + name
     }
 
-    // unexported helper (only visible inside package greetings)
+    // formatName is unexported and only visible inside the greetings package.
     func formatName(name string) string {
         return strings.TrimSpace(name)
     }
 
-    // Exported struct and mixed exported/unexported fields
     type Person struct {
-        Name string // exported
-        age  int    // unexported
+        Name string // exported field
+        age  int    // unexported field
     }
     ```
 
@@ -68,10 +74,11 @@ If you come from Java, the main differences to keep in mind are: packages and mo
   - Use consistent casing for acronyms: `HTTPClient`, not `HttpClient`.
 
 - File names
-  - Use all-lowercase, words separated by underscores or no separator: `main.go`, `http_server.go`. Avoid CamelCase file names.
+  - Use all-lowercase, words separated by underscores or no separator: `main.go`, `http_server.go`.
+  - Avoid CamelCase file names.
 
 - Constants and variables
-  - Prefer CamelCase for exported constants (e.g., `DefaultTimeout`) and short lowercase for local variables. Avoid ALL_CAPS or underscores like `MAX_SIZE` unless interacting with an external API that requires it.
+  - Prefer PascalCase for exported constants (e.g., `DefaultTimeout`) and short lowercase for local variables. Avoid ALL_CAPS.
 
 - Interfaces
   - Name interfaces by behavior when appropriate, often with an `-er` suffix: `Reader`, `Writer`, `Formatter`.
@@ -88,12 +95,25 @@ If you come from Java, the main differences to keep in mind are: packages and mo
   - Run `go fmt` (or `gofmt`) to format code automatically.
   - Use `go vet` and linters (e.g., `golangci-lint`) for better code quality.
 
+Java vs Go quick comparison (naming and visibility):
+
+- Java: class & public members typically start with capitalized ClassName and public methods/fields are visible due to the `public` keyword.
+- Go: visibility is determined solely by the first letter capitalization of the identifier (capital = exported/public, lowercase = unexported/private).
+
+Examples:
+- Java: public class MyClass { public void doStuff() {} }
+- Go: type MyType struct{} // exported type
+        func (t *MyType) DoStuff() {} // exported method
+        func helper() {} // unexported helper
+
 Quick checklist when writing Go code in this repo:
 - [ ] package names are lowercase and short
 - [ ] exported names start with a capital letter; unexported start lowercase
 - [ ] file names are lowercase
 - [ ] use `go fmt` before committing
 - [ ] write doc comments for exported items
+
+Pro tip: If you see identifiers or filenames starting with unusual prefixes like `P...` or `m...`, check whether they were added by habit (e.g., a Java habit) — in Go, prefer meaningful short names and follow the capitalization rule for export.
 
 References and additional reading:
 - Effective Go: https://golang.org/doc/effective_go

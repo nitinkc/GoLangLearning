@@ -1,6 +1,3 @@
-// Lesson 8: Structs in Go
-// Custom data types with multiple fields
-
 package main
 
 import "fmt"

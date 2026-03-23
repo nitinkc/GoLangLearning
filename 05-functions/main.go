@@ -1,6 +1,3 @@
-// Lesson 5: Functions in Go
-// Learn to create and use functions
-
 package main
 
 import "fmt"
@@ -10,7 +7,7 @@ func sayHello() {
 	fmt.Println("Hello!")
 }
 
-// Function with parameters
+// Function with parameters, return void
 func greet(name string) {
 	fmt.Printf("Hello, %s!\n", name)
 }
@@ -121,14 +118,3 @@ func main() {
 	fmt.Println("Double 5:", double(5))
 	fmt.Println("Triple 5:", triple(5))
 }
-
-/*
-EXERCISES:
-1. Create a function that calculates the factorial of a number
-2. Write a function that returns both min and max of three numbers
-3. Create a variadic function that finds the average
-4. Make a closure that counts how many times it's been called
-
-RUN THIS FILE:
-  go run main.go
-*/

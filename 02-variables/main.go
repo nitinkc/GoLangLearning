@@ -6,15 +6,18 @@ package main
 import "fmt"
 
 func main() {
+	// HAS TO BE USED : This variable is declared but not used, it will cause a compile error
+	//var unusedVariable int
+
 	// Method 1: var keyword with type
 	var name string = "Gopher"
 	var age int = 25
 
-	// Method 2: var with type inference
+	// Method 2: var with type inference, Assign IMMEDIATELY
 	var city = "San Francisco" // Go infers the type as string
 
 	// Method 3: Short declaration (most common) - only inside functions
-	country := "USA"
+	country := "USA" //Constants can't be declared this way, only variables
 	score := 95.5
 
 	// Multiple variable declaration
@@ -53,15 +56,13 @@ func main() {
 	fmt.Println("\n=== Zero Values ===")
 	fmt.Printf("int: %d, string: '%s', bool: %t, float: %f\n",
 		defaultInt, defaultString, defaultBool, defaultFloat)
+
+	//Print TYPE
+	fmt.Printf("int: %T, string: '%T', bool: %T, float: %T\n",
+		defaultInt, defaultString, defaultBool, defaultFloat)
 }
 
 /*
-EXERCISES:
-1. Create variables for your personal info (name, age, city)
-2. Try using the short declaration syntax (:=)
-3. Create a constant for your favorite number
-4. Observe what happens when you try to reassign a constant
-
 RUN THIS FILE:
   go run main.go
 */

@@ -1,4 +1,4 @@
-# Lesson 5: Functions
+# Functions
 
 ## What You'll Learn
 - Function declaration

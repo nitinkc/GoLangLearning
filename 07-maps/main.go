@@ -129,14 +129,3 @@ func main() {
 	}
 	fmt.Println()
 }
-
-/*
-EXERCISES:
-1. Create a map of your friends and their phone numbers
-2. Write a function that counts word frequency in a sentence
-3. Create a nested map for a simple address book
-4. Use a map to remove duplicates from a slice
-
-RUN THIS FILE:
-  go run main.go
-*/
